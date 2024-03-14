@@ -1,6 +1,6 @@
 const input = [1, 2, 1231, 1231, 22, 1231, 51829, 182, 192, 1001];
 
-const QuickSort = (input: number[]) => {
+const QuickSort = (input: number[]): number[] => {
     // trivially sort input less than 2 items
     if (input.length <= 2) {
         return input.sort((a, b) => a - b);
@@ -25,7 +25,11 @@ const QuickSort = (input: number[]) => {
         }
     }
 
-    return input
-        .slice(0, pivotIndex)
-        .concat([input[pivotIndex]], input.slice(pivotIndex + 1));
+    return QuickSort(input.slice(0, pivotIndex)).concat(
+        [input[pivotIndex]],
+        QuickSort(input.slice(pivotIndex + 1))
+    );
 };
+
+QuickSort(input);
+console.log(input);
